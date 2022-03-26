@@ -32,6 +32,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.HorizontalLayoutGroup
     - UnityEngine.UI.Image
     - UnityEngine.UI.RawImage
+    - UnityEngine.UI.Slider
   sceneClasses:
     Assets/Scenes/Game.unity:
     - Class: 1
@@ -65,13 +66,15 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1568}
+      Script: {instanceID: 1570}
     - Class: 114
-      Script: {instanceID: 1926}
+      Script: {instanceID: 1796}
     - Class: 114
-      Script: {instanceID: 1930}
+      Script: {instanceID: 1928}
     - Class: 114
-      Script: {instanceID: 2578}
+      Script: {instanceID: 1932}
+    - Class: 114
+      Script: {instanceID: 2580}
     - Class: 114
       Script: {instanceID: 2834}
     - Class: 114
@@ -141,24 +144,22 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
-    - Class: 89
-      Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1568}
+      Script: {instanceID: 1570}
     - Class: 114
-      Script: {instanceID: 1612}
+      Script: {instanceID: 1614}
     - Class: 114
-      Script: {instanceID: 1652}
+      Script: {instanceID: 1654}
     - Class: 114
-      Script: {instanceID: 1806}
+      Script: {instanceID: 1808}
     - Class: 114
-      Script: {instanceID: 1930}
+      Script: {instanceID: 1932}
     - Class: 114
-      Script: {instanceID: 2346}
+      Script: {instanceID: 2348}
     - Class: 114
       Script: {instanceID: 2844}
     - Class: 114
@@ -214,20 +215,18 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
-    - Class: 89
-      Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1568}
+      Script: {instanceID: 1570}
     - Class: 114
-      Script: {instanceID: 1652}
+      Script: {instanceID: 1654}
     - Class: 114
-      Script: {instanceID: 1930}
+      Script: {instanceID: 1932}
     - Class: 114
-      Script: {instanceID: 2532}
+      Script: {instanceID: 2534}
     - Class: 114
       Script: {instanceID: 2844}
     - Class: 114
@@ -785,7 +784,7 @@ ScriptsOnlyBuild:
     className: BeforeAfterTestCommandState
   - hash:
       serializedVersion: 2
-      Hash: 5e8f6d51a2d57ed2ea0363c1dcfdef83
+      Hash: 0fea689728e85712a8977b1fe0abb1ef
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerControlls
@@ -821,7 +820,7 @@ ScriptsOnlyBuild:
     className: TouchInputModule
   - hash:
       serializedVersion: 2
-      Hash: 3b419387954a5c0fe37dd4ff1f41c780
+      Hash: 0144d75fe25e891e8013525e5b8f8a20
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -848,4 +847,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/MainMenu.unity
   - Assets/Scenes/Profile.unity
   - Assets/Scenes/Game.unity
-  playerPath: C:/Users/Jozef/Desktop/Unity Games/HopperStopper/Bapper.apk
+  playerPath: C:/Users/Jozef/Desktop/Unity Games/Bopper/Bapper.apk

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerControlls : MonoBehaviour
 {
@@ -9,70 +8,57 @@ public class PlayerControlls : MonoBehaviour
     private float stopper;
     protected float Timer;
     private Vector3 lastpos;
-    public Slider StopTimer;
     private bool canRotate = true;
+    public AudioClip death_clip, orb_clip;
+    private AudioSource audioSource;
+    private bool stopped = false;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        StopTimer.maxValue = 4;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
     {
         Timer += Time.deltaTime;
-        if (Timer >= 1)
-        {
+        if (Timer >= 1){
             Timer = 0f;
-            if (stopper != 0)
-            {
-                if (maxSpeed > 40)
-                {
+            if (stopper != 0){
+                if (maxSpeed > 40){
                     maxSpeed = 40;
                 }
-                else if (stopper != 0f)
-                {
+                else if (stopper != 0f) {
                     maxSpeed += (maxSpeed / 100) * 0.75f;
                 }
                 PlayerPrefs.SetFloat("PlayerSpeed", maxSpeed);
             }
         }
-        
-
-
-        if (Input.touchCount > 0 && StopTimer.value <= 3.9f)
-        {
+        if (Input.touchCount > 0){
             stopper = 0f;
             rb.velocity = Vector3.zero;
             transform.position = lastpos;
-            StopTimer.value += Time.deltaTime;
             canRotate = false;
+            PlayerPrefs.SetInt("Stopped", 1);
         }
-
-        else 
-        {
+        else {
             stopper = 4f;
             lastpos = transform.position;
-            StopTimer.value -= Time.deltaTime;
             canRotate = true;
+            PlayerPrefs.SetInt("Stopped", 0);
         }
     }
 
     private void FixedUpdate()
     {
         Vector3 vel = rb.velocity;
-
-        // ak je maxspeed == 0, rychlost lopticky je 0
         if (Mathf.Approximately(maxSpeed, 0f)) rb.velocity = Vector3.zero;
         else
         {
-            // tlaci lopticku po osi "z" silou 4nasobne vacsou ako maxspeed, kvoli okamzitemu zrychleniu po zastaveni
             rb.AddForce(0f, 0f, maxSpeed * stopper);
             if (canRotate) rb.MoveRotation(rb.rotation * Quaternion.Euler(new Vector3(maxSpeed, 0f, 0f)));
             if (vel.magnitude >= maxSpeed) rb.velocity = vel.normalized * maxSpeed;
         }
-
-        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -88,7 +74,7 @@ public class PlayerControlls : MonoBehaviour
                 {
                     Time.timeScale = 0;
                     GameOverPanel.SetActive(true);
-                    
+                    audioSource.PlayOneShot(death_clip, PlayerPrefs.GetInt("Sound"));
                 }
                 break;
             
@@ -101,8 +87,10 @@ public class PlayerControlls : MonoBehaviour
         {
             case "Currency":
                 PlayerPrefs.SetInt("Currency", PlayerPrefs.GetInt("Currency", 0) + 1);
+                audioSource.PlayOneShot(orb_clip, PlayerPrefs.GetInt("Sound"));
                 Destroy(other.gameObject);
                 break;
         }
     }
+
 }

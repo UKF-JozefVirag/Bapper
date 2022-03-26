@@ -14,8 +14,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI OrbsText;
     [SerializeField] private GameObject DefSkin;
     [SerializeField] private Texture[] SkinImages = new Texture[5];
+    [SerializeField] private AudioSource music;
     private int skinpoint = 0;
-
 
     private void Awake()
     {
@@ -39,11 +39,6 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
-    public void OpenLeaderboards()
-    {
-        SceneManager.LoadScene("Leaderboards");
-    }
-
     public void OpenProfile()
     {
         SceneManager.LoadScene("Profile");
@@ -51,16 +46,17 @@ public class MenuManager : MonoBehaviour
 
     public void DisableSound()
     {
-        // ak playerprefs sound neexistuje, nastavi ho defaultne na 0
         int sound = PlayerPrefs.GetInt("Sound", 0);
         if (sound == 0)
         {
+            music.volume = 1f;
             redPipe.SetActive(false);
             PlayerPrefs.SetInt("Sound", 1);
             Debug.Log(PlayerPrefs.GetInt("Sound"));
         }
         else
         {
+            music.volume = 0f;
             redPipe.SetActive(true);
             PlayerPrefs.SetInt("Sound", 0);
             Debug.Log(PlayerPrefs.GetInt("Sound"));
@@ -128,19 +124,13 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    public void SelectBuySkin()
-    {
+    public void SelectBuySkin(){
         string ownedSkins = PlayerPrefs.GetString("OwnedSkins", "10000");
         char[] temp = ownedSkins.ToCharArray();
         int currency = PlayerPrefs.GetInt("Currency", 0);
-
-        
-
-        switch (skinpoint)
-        {
+        switch (skinpoint){
             case 4:
-                if (ownedSkins[4] != '1' && currency >= 20000)
-                {
+                if (ownedSkins[4] != '1' && currency >= 20000){
                     currency -= 20000;
                     temp[4] = '1';
                     ownedSkins = new string(temp);
@@ -149,8 +139,7 @@ public class MenuManager : MonoBehaviour
                     TextCost.text = "OWNED";
                     break;
                 }
-                else if (ownedSkins[4] == '1')
-                {
+                else if (ownedSkins[4] == '1'){
                     PlayerPrefs.SetInt("Skin", 4);
                     TextCost.text = "SELECTED";
                     break;
@@ -158,10 +147,8 @@ public class MenuManager : MonoBehaviour
                 else
                     StartCoroutine(ShowNotificationNoOrbs());
                     break;
-
             case 3:
-                if (ownedSkins[3] != '1' && currency >= 10000)
-                {
+                if (ownedSkins[3] != '1' && currency >= 10000){
                     currency -= 10000;
                     temp[3] = '1';
                     ownedSkins = new string(temp);
@@ -170,8 +157,7 @@ public class MenuManager : MonoBehaviour
                     TextCost.text = "OWNED";
                     break;
                 }
-                else if (ownedSkins[3] == '1')
-                {
+                else if (ownedSkins[3] == '1'){
                     PlayerPrefs.SetInt("Skin", 3);
                     TextCost.text = "SELECTED";
                     break;
@@ -179,10 +165,8 @@ public class MenuManager : MonoBehaviour
                 else
                     StartCoroutine(ShowNotificationNoOrbs());
                     break;
-
             case 2:
-                if (ownedSkins[2] != '1' && currency >= 5000)
-                {
+                if (ownedSkins[2] != '1' && currency >= 5000){
                     currency -= 5000;
                     temp[2] = '1';
                     ownedSkins = new string(temp);
@@ -191,8 +175,7 @@ public class MenuManager : MonoBehaviour
                     TextCost.text = "OWNED";
                     break;
                 }
-                else if (ownedSkins[2] == '1')
-                {
+                else if (ownedSkins[2] == '1'){
                     PlayerPrefs.SetInt("Skin", 2);
                     TextCost.text = "SELECTED";
                     break;
@@ -200,10 +183,8 @@ public class MenuManager : MonoBehaviour
                 else
                     StartCoroutine(ShowNotificationNoOrbs());
                     break;
-
             case 1:
-                if (ownedSkins[1] != '1' && currency >= 1000)
-                {
+                if (ownedSkins[1] != '1' && currency >= 1000){
                     currency -= 1000;
                     temp[1] = '1';
                     ownedSkins = new string(temp);
@@ -212,8 +193,7 @@ public class MenuManager : MonoBehaviour
                     TextCost.text = "OWNED";
                     break;
                 }
-                else if (ownedSkins[1] == '1')
-                {
+                else if (ownedSkins[1] == '1'){
                     PlayerPrefs.SetInt("Skin", 1);
                     TextCost.text = "SELECTED";
                     break;
@@ -221,24 +201,17 @@ public class MenuManager : MonoBehaviour
                 else
                     StartCoroutine(ShowNotificationNoOrbs());
                     break;
-
             case 0:
-
-                if ((PlayerPrefs.GetInt("Skin")) == skinpoint)
-                {
+                if ((PlayerPrefs.GetInt("Skin")) == skinpoint){
                     TextCost.text = "SELECTED";
                     PlayerPrefs.SetInt("Skin", 0);
-                }
-                else
-                {
+                }else{
                     PlayerPrefs.SetInt("Skin", 0);
                     TextCost.text = "OWNED";
                 }
                 break;
         }
         OrbsText.text = "Orbs: " + PlayerPrefs.GetInt("Currency", 0);
-
-        
     }
 
     IEnumerator ShowNotificationNoOrbs()
